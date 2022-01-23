@@ -46,8 +46,9 @@
   :global t
   :require 'ace-window
   :init-value nil
-  (if ace-window-posframe-mode
-      (ace-window-posframe-enable)
-    (ace-window-posframe-disable)))
+  (cond ((not (display-graphic-p))
+         (user-error "Only support be used with a graphic display"))
+        (ace-window-posframe-mode (ace-window-posframe-enable))
+        (t (ace-window-posframe-disable))))
 
 (provide 'ace-window-posframe)
