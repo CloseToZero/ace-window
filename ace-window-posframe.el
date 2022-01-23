@@ -1,3 +1,5 @@
+;;; ace-window-posframe.el --- Use posframe to display keys. -*- lexical-binding: t -*-
+
 (defvar aw--posframe-frames '())
 
 (defvar aw-posframe-position-handler #'posframe-poshandler-window-center)
