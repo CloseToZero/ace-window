@@ -16,7 +16,9 @@
          ;; the requested new frame.
          (bufname (format "*aw-posframe-buffer-%s*" str)))
     (with-selected-window wnd
-      (push bufname aw--posframe-frames)
+      ;; The number of frames won't be large, so it's fine to use
+      ;; `add-to-list'.
+      (add-to-list 'aw--posframe-frames bufname)
       (posframe-show bufname
                      :string str
                      :poshandler aw-posframe-position-handler
@@ -28,8 +30,7 @@
 
 (defun aw--remove-leading-chars-posframe ()
   ;; Hide rather than delete. See aw--lead-overlay-posframe for why.
-  (mapc #'posframe-hide aw--posframe-frames)
-  (setq aw--posframe-frames '()))
+  (mapc #'posframe-hide aw--posframe-frames))
 
 (defun ace-window-posframe-enable ()
   (setq aw--lead-overlay-fn #'aw--lead-overlay-posframe
